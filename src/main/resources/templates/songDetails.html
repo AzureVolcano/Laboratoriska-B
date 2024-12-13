@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        table {
+            width: 50%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding: 5px;
+        }
+
+        .actions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Song Details</h1>
+
+<!-- Прикажување на деталите за песната -->
+<table>
+    <tr>
+        <th>Track ID</th>
+        <td th:text="${song.trackId}"></td>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <td th:text="${song.title}"></td>
+    </tr>
+    <tr>
+        <th>Genre</th>
+        <td th:text="${song.genre}"></td>
+    </tr>
+    <tr>
+        <th>Release Year</th>
+        <td th:text="${song.releaseYear}"></td>
+    </tr>
+    <tr>
+        <th>Album</th>
+        <td th:text="${song.album.name}"></td>
+    </tr>
+</table>
+
+<h3>Performers</h3>
+<!-- Прикажување на изведувачите на песната -->
+<ul>
+    <li th:each="performer : ${song.performers}" th:text="${performer.firstName} + ' ' + ${performer.lastName}"></li>
+</ul>
+
+<!-- Акции: Уредување и брисање -->
+<div class="actions">
+    <a th:href="@{/songs/edit/{songId}(songId=${song.id})}">Edit</a> |
+    <a th:href="@{/songs/delete/{id}(id=${song.id})}">Delete</a>
+</div>
+
+</body>
+</html>

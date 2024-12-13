@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Artist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        form {
+            width: 60%;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Select Artist for <span th:text="${song.title}"></span></h1>
+
+<form th:action="@{/artists/add/{songId}(songId=${song.id})}" method="post">
+    <label for="artist">Choose an Artist</label>
+    <select id="artist" name="artistId" required>
+        <option th:each="artist : ${artists}" th:value="${artist.id}" th:text="${artist.firstName} + ' ' + ${artist.lastName}"></option>
+    </select>
+
+    <button type="submit">Add Artist</button>
+</form>
+
+</body>
+</html>
